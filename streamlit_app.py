@@ -22,7 +22,7 @@ st.sidebar.info("If no CSV file is uploaded, a default one will be used.")
 if uploaded_file is not None:
     df = pd.read_csv(uploaded_file)
 else:
-    df = pd.read_csv("biscayne_bay_dataset_oct_2022.csv")
+    df = pd.read_csv("datasets/2021-oct21.csv")
 
 st.divider()
 
@@ -42,7 +42,7 @@ with tables:
 with scatterPlot:
     st.write("Correlation")
     fig1 = px.scatter(df,
-                      x="Temperature (C)",
+                      x="Temperature (c)",
                       y="Total Water Column (m)",
                       color="pH")
     st.plotly_chart(fig1)
@@ -50,20 +50,20 @@ with scatterPlot:
 with maps:
     st.write("Map")
     fig2 = px.scatter_mapbox(df,
-                             lat="latitude",
-                             lon="longitude",
+                             lat="Latitude",
+                             lon="Longitude",
                              zoom=17,
                              mapbox_style="open-street-map",
                              hover_data=df,
-                             color="Temperature (C)")
+                             color="Temperature (c)")
     st.plotly_chart(fig2)
 
 with threeDPlot:
     st.write("3d Visualization")
     fig3 = px.scatter_3d(df,
-                         x="longitude",
-                         y="latitude",
+                         x="Longitude",
+                         y="Latitude",
                          z="Total Water Column (m)",
-                         color="Temperature (C)",)
+                         color="Temperature (c)",)
     fig3.update_scenes(zaxis_autorange="reversed")
     st.plotly_chart(fig3)
